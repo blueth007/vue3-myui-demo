@@ -1,82 +1,39 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import Layout from "../views/Layout.vue";
-
-const routes = [
+import Layout from "../views/Layout/index.vue";
+import pageView from "./pageView";
+import buttonView from "./buttonView";
+import svgViews from "./svgViews";
+export const routes = [
   {
     path: "/",
     component: Layout,
     name: "Dashboard",
     redirect: "/dashboard",
+    meta: {
+      title: "Dashboard",
+      icon: "mdi:view-dashboard",
+    },
     children: [
       {
         path: "dashboard",
-        component: () => import("../views/dashboard.vue"),
+        // component: () => import("../views/HomePage/index.vue"),
+        component: () => import("@/components/PageDemo/videoTrans.vue"),
         name: "Dashboard",
-        meta: { title: "Dashboard", icon: "mdi:view-dashboard", affix: true },
-      },
-    ],
-  },
-
-  {
-    path: "/pagesView",
-    component: Layout,
-    redirect: "/pages/file-folder",
-    name: "FileFolder",
-    meta: {
-      title: "FileFolder",
-      icon: "mdi:lock",
-    },
-    children: [
-      {
-        path: "file-folder",
-        component: () => import("../components/PagesView/fileFolder.vue"),
-        name: "FileFolder",
-        meta: {
-          title: "FileFolder",
-          roles: ["admin"], // or you can only set roles in sub nav
-        },
+        meta: { title: "videoTrans3D", affix: true },
       },
       {
-        path: "directive",
-        component: () => import("../views/HomePage/index.vue"),
-        name: "DirectivePermission",
+        path: "/animated-banner",
+        name: "animated-banner",
+        component: () => import("@/components/PageDemo/animatedBanner.vue"),
         meta: {
-          title: "Directive Permission",
-          // if do not set roles, means: this page does not require permission
+          title: "Animated Banner",
         },
       },
     ],
   },
-  {
-    path: "/permission1",
-    component: Layout,
-    redirect: "/permission/page2",
-    name: "Permission2",
-    meta: {
-      title: "Permission2",
-      icon: "mdi:lock",
-    },
-    children: [
-      {
-        path: "page2",
-        component: () => import("../views/HomePage/index.vue"),
-        name: "PagePermission2",
-        meta: {
-          title: "Page Permission2",
-          roles: ["admin"], // or you can only set roles in sub nav
-        },
-      },
-      {
-        path: "directive2",
-        component: () => import("../views/HomePage/index.vue"),
-        name: "DirectivePermission2",
-        meta: {
-          title: "Directive Permission2",
-          // if do not set roles, means: this page does not require permission
-        },
-      },
-    ],
-  },
+  pageView,
+  buttonView,
+  svgViews,
 ];
 
 const router = createRouter({

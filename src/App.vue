@@ -8,4 +8,9 @@
 
 </script>
 
-<style scoped></style>
+<style>
+:root {
+  --TopHeaderHeight: 60px;
+
+}
+</style>
